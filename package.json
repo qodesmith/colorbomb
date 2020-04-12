@@ -1,0 +1,31 @@
+{
+  "name": "colorbomb",
+  "version": "1.0.0",
+  "description": "A library for converting, creating, and manipulating colors for the web!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qodesmith/colorbomb.git"
+  },
+  "keywords": [
+    "color utility",
+    "color conversion",
+    "rgb",
+    "rgba",
+    "hsl",
+    "hsla",
+    "hex"
+  ],
+  "author": "Qodesmith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qodesmith/colorbomb/issues"
+  },
+  "homepage": "https://github.com/qodesmith/colorbomb#readme",
+  "devDependencies": {
+    "jest": "^25.3.0"
+  }
+}
