@@ -6,7 +6,17 @@ import { numCheck } from './helpers'
 import addHex from './addHex'
 import addHsl from './addHsl'
 
-
+/*
+  Example uses:
+    * colorBomb('red')
+    * colorBomb('#f00')
+    * colorBomb('#ff0000')
+    * colorBomb('#ff000022')
+    * colorBomb('rgb(255, 0, 0)')
+    * colorBomb('rgba(255, 0, 0, .33)')
+    * colorBomb('hsl(160, 100%, 75%)')
+    * colorBomb('hsla(160, 100%, 75%, .33)')
+*/
 function colorBomb(input) {
   if (typeof input !== 'string') throw new TypeError("You didn't give colorBomb a string :(")
 
@@ -33,16 +43,29 @@ function colorBomb(input) {
   }
 }
 
-/*
-  Add utility functions to colorBomb.
 
-  These functions can take an array of relevant values
-  or each value as an argument.
+//////////////////////////////////////////////////////////
+// Add utility functions to colorBomb.                  //
+//                                                      //
+// These functions can take an array of relevant values //
+// or each value as an argument.                        //
+//////////////////////////////////////////////////////////
+
+
+/*
+  Example uses:
+    * colorBomb.rgb([255, 0, 0])
+    * colorBomb.rgb(255, 0, 0)
 */
 colorBomb.rgb = function fromRawRgb(r, g, b) {
   return _fromRawRgbOrRgba(Array.isArray(r) ? r : [r, g, b], true)
 }
 
+/*
+  Example uses:
+    * colorBomb.rgba([255, 0, 0, .3])
+    * colorBomb.rgba(255, 0, 0, .3)
+*/
 colorBomb.rgba = function fromRawRgba(r, g, b, a) {
   return _fromRawRgbOrRgba(Array.isArray(r) ? r : [r, g, b, a])
 }
@@ -63,10 +86,20 @@ function _fromRawRgbOrRgba(values, calledFromRgb) {
   return addHex(addHsl({ r, g, b, a: alpha }))
 }
 
+/*
+  Example uses:
+    * colorBomb.hsl([327, 100, 86])
+    * colorBomb.hsl(327, 100, 86)
+*/
 colorBomb.hsl = function fromRawHsl(h, s, l) {
   return _fromRawHslOrHsla(Array.isArray(h) ? h : [h, s, l], true)
 }
 
+/*
+  Example uses:
+    * colorBomb.hsla([327, 100, 86, .3])
+    * colorBomb.hsla(327, 100, 86, .3)
+*/
 colorBomb.hsla = function fromRawHsla(h, s, l, a) {
   return _fromRawHslOrHsla(Array.isArray(h) ? h : [h, s, l, a])
 }
