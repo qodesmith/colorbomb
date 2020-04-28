@@ -19,6 +19,7 @@ module.exports = (env, argv) => ({
     libraryTarget: 'umd'
   },
   devServer: {
+    contentBase: path.resolve(__dirname, './sandbox'),
     port: 9001,
     public: 'http://localhost:9001'
   },

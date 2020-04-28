@@ -16,7 +16,7 @@ const numCheck = (num, min = 0, max = 255) => +num >= min && +num <= max
 // Ensures a hue value between 0 and 360˚.
 const safeHue = hue => +hue % 360 + (+hue < 0 ? 360 : 0)
 
-export default {
+export {
   hexDigitToNum,
   numToHexDigit,
   numCheck,
