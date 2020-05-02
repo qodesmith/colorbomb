@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = (env, argv) => ({
@@ -15,8 +16,10 @@ module.exports = (env, argv) => ({
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: env.prod ? 'colorBomb.js' : '[name].js',
-    library: 'colorBomb',
-    libraryTarget: 'umd'
+    // library: ['colorBomb', '[name]'],
+    // libraryTarget: 'umd',
+    // libraryExport: ['default'],
+    globalObject: 'this'
   },
   devServer: {
     contentBase: path.resolve(__dirname, './sandbox'),
@@ -38,12 +41,21 @@ module.exports = (env, argv) => ({
       })
     ]
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      }
+    ]
+  },
   plugins: [
+    !env.prod && new MiniCssExtractPlugin({ filename: 'colorBomb.css' }),
     !env.prod && new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'sandbox/index.ejs'),
       title: 'Color Bomb Sandbox',
-      chunks: ['colorBomb', 'sandbox'],
-      chunksSortMode: 'manual'
+      // chunks: ['colorBomb', 'sandbox'],
+      // chunksSortMode: 'manual'
     })
   ].filter(Boolean)
 })
