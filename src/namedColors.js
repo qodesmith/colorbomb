@@ -1,3 +1,8 @@
+/*
+  5/3/2020
+  All CSS color names found here - https://drafts.csswg.org/css-color/#named-colors
+*/
+
 const namedColors = [
   // Red
   { name: 'indianred', hex: '#cd5c5c' },
@@ -160,7 +165,16 @@ const namedColors = [
   { name: 'lightslategray', hex: '#778899' },
   { name: 'slategray', hex: '#708090' },
   { name: 'darkslategray', hex: '#2f4f4f' },
-  { name: 'black', hex: '#000000' }
+  { name: 'black', hex: '#000000' },
+
+  // GrEy - #BecauseEnglish
+  { name: 'darkgrey', hex: '#a9a9a9' },
+  { name: 'darkslategrey', hex: '#2f4f4f' },
+  { name: 'dimgrey', hex: '#696969' },
+  { name: 'grey', hex: '#808080' },
+  { name: 'lightgrey', hex: '#d3d3d3' },
+  { name: 'lightslategrey', hex: '#778899' },
+  { name: 'slategrey', hex: '#708090' }
 ]
 
 export default namedColors
