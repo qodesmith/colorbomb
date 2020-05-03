@@ -8,17 +8,17 @@ import addHsl from './addHsl'
 
 /*
   Example uses:
-    * colorBomb('red')
-    * colorBomb('#f00')
-    * colorBomb('#ff0000')
-    * colorBomb('#ff000022')
-    * colorBomb('rgb(255, 0, 0)')
-    * colorBomb('rgba(255, 0, 0, .33)')
-    * colorBomb('hsl(160, 100%, 75%)')
-    * colorBomb('hsla(160, 100%, 75%, .33)')
+    * colorbomb('red')
+    * colorbomb('#f00')
+    * colorbomb('#ff0000')
+    * colorbomb('#ff000022')
+    * colorbomb('rgb(255, 0, 0)')
+    * colorbomb('rgba(255, 0, 0, .33)')
+    * colorbomb('hsl(160, 100%, 75%)')
+    * colorbomb('hsla(160, 100%, 75%, .33)')
 */
-function colorBomb(input) {
-  if (typeof input !== 'string') throw new TypeError("You didn't give colorBomb a string :(")
+function colorbomb(input) {
+  if (typeof input !== 'string') throw new TypeError("You didn't give colorbomb a string :(")
 
   // Sanitize the input string.
   const str = input.toLowerCase().replace(/ /g, '')
@@ -39,13 +39,13 @@ function colorBomb(input) {
   } else {
     const namedColorObj = namedColors.find(({ name }) => name === str)
     if (namedColorObj) return hexColor(namedColorObj.hex)
-    throw new TypeError(`colorBomb isn't sure what to do with "${str}".`)
+    throw new TypeError(`colorbomb isn't sure what to do with "${str}".`)
   }
 }
 
 
 //////////////////////////////////////////////////////////
-// Add utility functions to colorBomb.                  //
+// Add utility functions to colorbomb.                  //
 //                                                      //
 // These functions can take an array of relevant values //
 // or each value as an argument.                        //
@@ -54,19 +54,19 @@ function colorBomb(input) {
 
 /*
   Example uses:
-    * colorBomb.rgb([255, 0, 0])
-    * colorBomb.rgb(255, 0, 0)
+    * colorbomb.rgb([255, 0, 0])
+    * colorbomb.rgb(255, 0, 0)
 */
-colorBomb.rgb = function fromRawRgb(r, g, b) {
+colorbomb.rgb = function fromRawRgb(r, g, b) {
   return _fromRawRgbOrRgba(Array.isArray(r) ? r : [r, g, b], true)
 }
 
 /*
   Example uses:
-    * colorBomb.rgba([255, 0, 0, .3])
-    * colorBomb.rgba(255, 0, 0, .3)
+    * colorbomb.rgba([255, 0, 0, .3])
+    * colorbomb.rgba(255, 0, 0, .3)
 */
-colorBomb.rgba = function fromRawRgba(r, g, b, a) {
+colorbomb.rgba = function fromRawRgba(r, g, b, a) {
   return _fromRawRgbOrRgba(Array.isArray(r) ? r : [r, g, b, a])
 }
 
@@ -76,7 +76,7 @@ function _fromRawRgbOrRgba(values, calledFromRgb) {
   const alpha = calledFromRgb ? 1 : rgb.pop()
   const rgbOk = rgb.every(val => numCheck(val))
   const alphaOk = numCheck(alpha, 0, 1)
-  const commonMessage = ` provided to \`colorBomb.rgb${calledFromRgb ? '' : 'a'}\`.`
+  const commonMessage = ` provided to \`colorbomb.rgb${calledFromRgb ? '' : 'a'}\`.`
 
   if (!rgbOk) throw new Error(`Invalid values${commonMessage}`)
   if (values.length !== (calledFromRgb ? 3 : 4)) throw new Error(`Incorrect number of values ${commonMessage}`)
@@ -88,19 +88,19 @@ function _fromRawRgbOrRgba(values, calledFromRgb) {
 
 /*
   Example uses:
-    * colorBomb.hsl([327, 100, 86])
-    * colorBomb.hsl(327, 100, 86)
+    * colorbomb.hsl([327, 100, 86])
+    * colorbomb.hsl(327, 100, 86)
 */
-colorBomb.hsl = function fromRawHsl(h, s, l) {
+colorbomb.hsl = function fromRawHsl(h, s, l) {
   return _fromRawHslOrHsla(Array.isArray(h) ? h : [h, s, l], true)
 }
 
 /*
   Example uses:
-    * colorBomb.hsla([327, 100, 86, .3])
-    * colorBomb.hsla(327, 100, 86, .3)
+    * colorbomb.hsla([327, 100, 86, .3])
+    * colorbomb.hsla(327, 100, 86, .3)
 */
-colorBomb.hsla = function fromRawHsla(h, s, l, a) {
+colorbomb.hsla = function fromRawHsla(h, s, l, a) {
   return _fromRawHslOrHsla(Array.isArray(h) ? h : [h, s, l, a])
 }
 
@@ -113,7 +113,7 @@ function _fromRawHslOrHsla(values, calledFromHsl) {
   const saturationOk = numCheck(s, 0, 100)
   const lightnessOk = numCheck(l, 0, 100)
   const alphaOk = numCheck(alpha, 0, 1)
-  const commonMessage = ` provided to \`colorBomb.hsl${calledFromHsl ? '' : 'a'}\`.`
+  const commonMessage = ` provided to \`colorbomb.hsl${calledFromHsl ? '' : 'a'}\`.`
 
   if (!hueOk) throw new Error(`Incorrect hue value${commonMessage}`)
   if (!saturationOk) throw new Error(`Incorrect saturation value${commonMessage}`)
@@ -122,4 +122,4 @@ function _fromRawHslOrHsla(values, calledFromHsl) {
   if (!alphaOk) throw new Error(`Incorrect alpha value${commonMessage}`)
 }
 
-export default colorBomb
+export default colorbomb
