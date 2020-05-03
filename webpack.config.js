@@ -6,22 +6,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = (env, argv) => ({
   mode: env.prod ? 'production' : 'development',
-  entry: env.prod
-    ? path.resolve(__dirname, 'src/colorBomb.js')
-    : {
-      colorBomb: path.resolve(__dirname, 'src/colorBomb.js'),
-      sandbox: path.resolve(__dirname, 'sandbox/sandbox.js')
-    },
+  entry: path.resolve(__dirname, env.prod ? 'src/colorbomb.js' : 'sandbox/sandbox.js'),
   target: 'web',
-  output: {
+  output: env.prod ? {
     path: path.resolve(__dirname, 'dist'),
-    filename: env.prod ? 'colorBomb.js' : '[name].js',
-    // library: ['colorBomb', '[name]'],
-    // libraryTarget: 'umd',
-    // libraryExport: ['default'],
-    globalObject: 'this'
-  },
+    library: 'colorbomb',
+    libraryExport: 'default',
+    libraryTarget: 'umd',
+    filename: 'colorbomb.js'
+  } : {},
   devServer: {
+    open: true,
     contentBase: path.resolve(__dirname, './sandbox'),
     port: 9001,
     public: 'http://localhost:9001'
@@ -49,13 +44,11 @@ module.exports = (env, argv) => ({
       }
     ]
   },
-  plugins: [
-    !env.prod && new MiniCssExtractPlugin({ filename: 'colorBomb.css' }),
-    !env.prod && new HtmlWebpackPlugin({
+  plugins: !env.prod ? [
+    new MiniCssExtractPlugin({ filename: 'colorbomb.css' }),
+    new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'sandbox/index.ejs'),
       title: 'Color Bomb Sandbox',
-      // chunks: ['colorBomb', 'sandbox'],
-      // chunksSortMode: 'manual'
     })
-  ].filter(Boolean)
+  ] : []
 })
