@@ -14,7 +14,7 @@ function addRawStringValues(obj) {
   } = obj
   const hex = `#${hexr}${hexg}${hexb}`
   const rgbValue = `${r},${g},${b}`
-  const hslValue = `${h},${s * 100}%,${l * 100}%`
+  const hslValue = `${Math.round(h)},${Math.round(s * 100)}%,${Math.round(l * 100)}%`
 
   obj.rawStringValues = {
     hex,
