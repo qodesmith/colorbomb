@@ -5,6 +5,7 @@ import namedColors from './namedColors'
 import { numCheck } from './helpers'
 import addHex from './addHex'
 import addHsl from './addHsl'
+import addRawStringValues from './addRawStringValues'
 
 /*
   Example uses:
@@ -25,20 +26,20 @@ function colorbomb(input) {
 
   // Check for named colors.
   if (str.startsWith('#')) {
-    return hexColor(str)
+    return addRawStringValues(hexColor(str))
 
   // Starts with 'rgb(' or 'rgba('
   } else if (/^(rgb\(|rgba\()/.test(str)) {
-    return rgbaColor(str)
+    return addRawStringValues(rgbaColor(str))
 
   // Starts with 'hsl(' or 'hsla('
   } else if (/^(hsl\(|hsla\()/.test(str)) {
-    return hslaColor(str)
+    return addRawStringValues(hslaColor(str))
 
   // Named colors or error.
   } else {
     const namedColorObj = namedColors.find(({ name }) => name === str)
-    if (namedColorObj) return hexColor(namedColorObj.hex)
+    if (namedColorObj) return addRawStringValues(hexColor(namedColorObj.hex))
     throw new TypeError(`"${str}" isn't a valid hex(a), rgb(a), hsl(a), or CSS named color.`)
   }
 }
