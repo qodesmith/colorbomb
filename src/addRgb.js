@@ -11,15 +11,12 @@ function addRgb(obj) {
   const h1 = safeHue(h) / 60
   const x = chroma * (1 - Math.abs((h1 % 2) - 1))
   const rgbPrimes = (() => {
-    switch(Math.ceil(h1)) {
-      case 1: return [chroma, x, 0]
-      case 2: return [x, chroma, 0]
-      case 3: return [0, chroma, x]
-      case 4: return [0, x, chroma]
-      case 5: return [x, 0, chroma]
-      case 6: return [chroma, 0, x]
-      default: return [0, 0, 0]
-    }
+    if (h1 <= 1) return [chroma, x, 0]
+    if (h1 <= 2) return [x, chroma, 0]
+    if (h1 <= 3) return [0, chroma, x]
+    if (h1 <= 4) return [0, x, chroma]
+    if (h1 <= 5) return [x, 0, chroma]
+    if (h1 <= 6) return [chroma, 0, x]
   })()
   const match = l - (chroma / 2)
   const [r, g, b] = rgbPrimes.map(prime => Math.round((prime + match) * 255))

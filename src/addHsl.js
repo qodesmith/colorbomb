@@ -1,3 +1,5 @@
+import { safeHue } from './helpers'
+
 /*
   Add hsl values to a color object.
   https://bit.ly/2yUE7xl - Conversion formula came from this wikipedia article. 🙃
@@ -27,7 +29,7 @@ function addHsl(obj) {
     return chroma / (1 - Math.abs(2 * max - chroma - 1))
   })()
 
-  return { ...obj, h: hue, s: saturation, l: lightness }
+  return { ...obj, h: safeHue(hue), s: saturation, l: lightness }
 }
 
 export default addHsl
