@@ -39,7 +39,7 @@ function colorbomb(input) {
   } else {
     const namedColorObj = namedColors.find(({ name }) => name === str)
     if (namedColorObj) return hexColor(namedColorObj.hex)
-    throw new TypeError(`colorbomb isn't sure what to do with "${str}".`)
+    throw new TypeError(`"${str}" isn't a valid hex(a), rgb(a), hsl(a), or CSS named color.`)
   }
 }
 
