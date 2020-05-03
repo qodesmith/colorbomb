@@ -18,7 +18,7 @@ function hexColor(str) {
   const isShorthand = is3 || is4
   const matches = (hex.match(/[a-f]|[0-9]/g) || []).length
   const firstCheck = matches === hex.length && (isShorthand || is6 || is8)
-  const error = new TypeError(`Invalid hex color - ${hex}`)
+  const error = new TypeError(`"${hex}" isn't a valid hex${(is4 || is8 || hex.length > 6) ? '(a)' : ''} color.`)
 
   if (!firstCheck) throw error
 

@@ -13,7 +13,7 @@ function rgbaColor(str) {
   */
   const [type, r, g, b, a, empty] = str.split(/[\(\),]/)
   const isRgb = type === 'rgb'
-  const error = new TypeError(`"${str}" isn't a valid ${type}(...) color.`)
+  const error = new TypeError(`"${str}" isn't a valid ${type} color.`)
 
   // Check for the correct ending and the correct empty string - there's always an empty string.
   if (!str.endsWith(')') || (isRgb ? a : empty) !== '') throw error

@@ -11,10 +11,10 @@ function hslaColor(str) {
   */
   const [type, h, s, l, a, empty] = str.split(/[\(\),]/)
   const isHsl = type === 'hsl'
-  const error = new TypeError(`"${str}" isn't a valid ${type}(...) color.`)
+  const error = new TypeError(`"${str}" isn't a valid ${type} color.`)
   const getPercentNumAndCheck = val => {
     const num = +val.slice(0, -1)
-    if (!/%$/.test(val) || !Number.isInteger(num) || !numCheck(num, 0, 100)) throw error
+    if (!/%$/.test(val) || !numCheck(num, 0, 100)) throw error
     return num / 100
   }
 
