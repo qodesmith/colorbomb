@@ -1,11 +1,11 @@
-import hexColor from './hexColor'
-import rgbaColor from './rgbaColor'
-import hslaColor from './hslaColor'
-import namedColors from './namedColors'
-import {numCheck} from './helpers'
-import addHex from './addHex'
-import addHsl from './addHsl'
-import addRawStringValues from './addRawStringValues'
+import hexColor from './hexColor.js'
+import rgbaColor from './rgbaColor.js'
+import hslaColor from './hslaColor.js'
+import namedColors from './namedColors.js'
+import {numCheck} from './helpers.js'
+import addHex from './addHex.js'
+import addHsl from './addHsl.js'
+import addRawStringValues from './addRawStringValues.js'
 
 /*
   TODO:

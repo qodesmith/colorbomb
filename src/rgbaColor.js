@@ -1,7 +1,6 @@
-import { numCheck } from './helpers'
-import addHex from './addHex'
-import addHsl from './addHsl'
-
+import {numCheck} from './helpers.js'
+import addHex from './addHex.js'
+import addHsl from './addHsl.js'
 
 // Rgb(a) string => color object.
 function rgbaColor(str) {
@@ -24,7 +23,7 @@ function rgbaColor(str) {
 
   if (!colorsOk || !alphaOk) throw error
 
-  const results = { r: +r, g: +g, b: +b, a: +alpha }
+  const results = {r: +r, g: +g, b: +b, a: +alpha}
   return addHex(addHsl(results))
 }
 
