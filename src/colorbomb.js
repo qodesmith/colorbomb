@@ -2,12 +2,16 @@ import hexColor from './hexColor'
 import rgbaColor from './rgbaColor'
 import hslaColor from './hslaColor'
 import namedColors from './namedColors'
-import { numCheck } from './helpers'
+import {numCheck} from './helpers'
 import addHex from './addHex'
 import addHsl from './addHsl'
 import addRawStringValues from './addRawStringValues'
 
 /*
+  TODO:
+    Make some tools, like the "Choose a harmony" tool
+    found in this article - https://blog.datawrapper.de/beautifulcolors/
+
   Example uses:
     * colorbomb('red')
     * colorbomb('#f00')
@@ -19,7 +23,9 @@ import addRawStringValues from './addRawStringValues'
     * colorbomb('hsla(160, 100%, 75%, .33)')
 */
 function colorbomb(input) {
-  if (typeof input !== 'string') throw new TypeError("You didn't give colorbomb a string :(")
+  if (typeof input !== 'string') {
+    throw new TypeError("You didn't give colorbomb a string :(")
+  }
 
   // Sanitize the input string.
   const str = input.toLowerCase().replace(/ /g, '')
@@ -28,22 +34,23 @@ function colorbomb(input) {
   if (str.startsWith('#')) {
     return addRawStringValues(hexColor(str))
 
-  // Starts with 'rgb(' or 'rgba('
+    // Starts with 'rgb(' or 'rgba('
   } else if (/^(rgb\(|rgba\()/.test(str)) {
     return addRawStringValues(rgbaColor(str))
 
-  // Starts with 'hsl(' or 'hsla('
+    // Starts with 'hsl(' or 'hsla('
   } else if (/^(hsl\(|hsla\()/.test(str)) {
     return addRawStringValues(hslaColor(str))
 
-  // Named colors or error.
+    // Named colors or error.
   } else {
-    const namedColorObj = namedColors.find(({ name }) => name === str)
+    const namedColorObj = namedColors.find(({name}) => name === str)
     if (namedColorObj) return addRawStringValues(hexColor(namedColorObj.hex))
-    throw new TypeError(`"${str}" isn't a valid hex(a), rgb(a), hsl(a), or CSS named color.`)
+    throw new TypeError(
+      `"${str}" isn't a valid hex(a), rgb(a), hsl(a), or CSS named color.`,
+    )
   }
 }
-
 
 //////////////////////////////////////////////////////////
 // Add utility functions to colorbomb.                  //
@@ -51,7 +58,6 @@ function colorbomb(input) {
 // These functions can take an array of relevant values //
 // or each value as an argument.                        //
 //////////////////////////////////////////////////////////
-
 
 /*
   Example uses:
@@ -77,14 +83,18 @@ function _fromRawRgbOrRgba(values, calledFromRgb) {
   const alpha = calledFromRgb ? 1 : rgb.pop()
   const rgbOk = rgb.every(val => numCheck(val))
   const alphaOk = numCheck(alpha, 0, 1)
-  const commonMessage = ` provided to \`colorbomb.rgb${calledFromRgb ? '' : 'a'}\`.`
+  const commonMessage = ` provided to \`colorbomb.rgb${
+    calledFromRgb ? '' : 'a'
+  }\`.`
 
   if (!rgbOk) throw new Error(`Invalid values${commonMessage}`)
-  if (values.length !== (calledFromRgb ? 3 : 4)) throw new Error(`Incorrect number of values ${commonMessage}`)
+  if (values.length !== (calledFromRgb ? 3 : 4)) {
+    throw new Error(`Incorrect number of values ${commonMessage}`)
+  }
   if (!alphaOk) throw new Error(`Incorrect alpha value${commonMessage}`)
 
   const [r, g, b] = rgb.map(Math.round) // Round to whole numbers.
-  return addHex(addHsl({ r, g, b, a: alpha }))
+  return addHex(addHsl({r, g, b, a: alpha}))
 }
 
 /*
@@ -114,12 +124,18 @@ function _fromRawHslOrHsla(values, calledFromHsl) {
   const saturationOk = numCheck(s, 0, 100)
   const lightnessOk = numCheck(l, 0, 100)
   const alphaOk = numCheck(alpha, 0, 1)
-  const commonMessage = ` provided to \`colorbomb.hsl${calledFromHsl ? '' : 'a'}\`.`
+  const commonMessage = ` provided to \`colorbomb.hsl${
+    calledFromHsl ? '' : 'a'
+  }\`.`
 
   if (!hueOk) throw new Error(`Incorrect hue value${commonMessage}`)
-  if (!saturationOk) throw new Error(`Incorrect saturation value${commonMessage}`)
+  if (!saturationOk) {
+    throw new Error(`Incorrect saturation value${commonMessage}`)
+  }
   if (!lightnessOk) throw new Error(`Incorrect lightness value${commonMessage}`)
-  if (values.length !== (calledFromHsl ? 3 : 4)) throw new Error(`Incorrect number of values ${commonMessage}`)
+  if (values.length !== (calledFromHsl ? 3 : 4)) {
+    throw new Error(`Incorrect number of values ${commonMessage}`)
+  }
   if (!alphaOk) throw new Error(`Incorrect alpha value${commonMessage}`)
 }
 
