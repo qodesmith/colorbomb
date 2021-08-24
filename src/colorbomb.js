@@ -78,7 +78,7 @@ colorbomb.rgba = function fromRawRgba(r, g, b, a) {
 }
 
 function _fromRawRgbOrRgba(values, calledFromRgb) {
-  // Convert each value to a number - allow strings for flexibility.
+  // Convert each value to a number - we allow strings for flexibility.
   const rgb = values.map(val => +val)
   const alpha = calledFromRgb ? 1 : rgb.pop()
   const rgbOk = rgb.every(val => numCheck(val))
@@ -116,7 +116,7 @@ colorbomb.hsla = function fromRawHsla(h, s, l, a) {
 }
 
 function _fromRawHslOrHsla(values, calledFromHsl) {
-  // Convert each value to a number - allow strings for flexibility.
+  // Convert each value to a number - we allow strings for flexibility.
   const hsl = values.map(val => +val)
   const [h, s, l] = hsl
   const alpha = calledFromHsl ? 1 : rgb.pop()

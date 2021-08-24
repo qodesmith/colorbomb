@@ -1,6 +1,5 @@
-import colorbomb from '../src/colorbomb'
+import colorbomb from '../src/colorbomb.js'
 import './sandbox.css'
-
 
 // Let's us play with colorbomb in the console.
 window.colorbomb = colorbomb
@@ -26,7 +25,7 @@ function findSwatchFromInputNode(input, swatchType) {
 }
 
 function setSwatchBackgroundColors(input, color) {
-  const { rawStringValues, a } = color
+  const {rawStringValues, a} = color
   const swatchHex = findSwatchFromInputNode(input, 'hex')
   const swatchRgb = findSwatchFromInputNode(input, 'rgb')
   const swatchHsl = findSwatchFromInputNode(input, 'hsl')
@@ -35,9 +34,21 @@ function setSwatchBackgroundColors(input, color) {
   const hslText = swatchHsl.querySelector('.value')
   const alphaOrNot = a === 1 ? '' : 'a'
 
-  swatchHex.setAttribute('style', `background: ${hexText.textContent = rawStringValues[`hex${alphaOrNot}`]}`)
-  swatchRgb.setAttribute('style', `background: ${rgbText.textContent = rawStringValues[`rgb${alphaOrNot}`]}`)
-  swatchHsl.setAttribute('style', `background: ${hslText.textContent = rawStringValues[`hsl${alphaOrNot}`]}`)
+  swatchHex.setAttribute(
+    'style',
+    `background: ${(hexText.textContent =
+      rawStringValues[`hex${alphaOrNot}`])}`,
+  )
+  swatchRgb.setAttribute(
+    'style',
+    `background: ${(rgbText.textContent =
+      rawStringValues[`rgb${alphaOrNot}`])}`,
+  )
+  swatchHsl.setAttribute(
+    'style',
+    `background: ${(hslText.textContent =
+      rawStringValues[`hsl${alphaOrNot}`])}`,
+  )
 }
 
 /*
@@ -53,7 +64,6 @@ document.addEventListener('input', e => {
   error.textContent = ''
 })
 
-
 // colorbomb(...)
 document.querySelector('.colorbomb form').addEventListener('submit', e => {
   e.preventDefault()
@@ -63,7 +73,7 @@ document.querySelector('.colorbomb form').addEventListener('submit', e => {
   try {
     const color = colorbomb(value)
     setSwatchBackgroundColors(input, color)
-  } catch(e) {
+  } catch (e) {
     const error = findErrorNodeFromInputNode(input)
     error.textContent = e.message
   }
