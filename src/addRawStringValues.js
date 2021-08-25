@@ -19,9 +19,7 @@ function addRawStringValues(obj) {
     rgba: `rgba(${rgbValue},${a})`,
     hsl: `hsl(${hslValue})`,
     hsla: `hsla(${hslValue},${a})`,
-    colorName: (
-      namedColors.find(colorNameObj => colorNameObj.hex === hex) || {}
-    ).name,
+    colorName: namedColors.find(colorNameObj => colorNameObj.hex === hex)?.name,
   }
 
   return obj

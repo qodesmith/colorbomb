@@ -15,7 +15,7 @@ function hexColor(str) {
   const is6 = hex.length === 6 // ff0022
   const is8 = hex.length === 8 // ff0022aa - has alpha
   const isShorthand = is3 || is4
-  const matches = (hex.match(/[a-f]|[0-9]/g) || []).length
+  const matches = hex.match(/[a-f]|[0-9]/g)?.length
   const firstCheck = matches === hex.length && (isShorthand || is6 || is8)
   const error = new TypeError(
     `"${hex}" isn't a valid hex${
