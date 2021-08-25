@@ -22,10 +22,6 @@ export default function webpackConfig(env, argv) {
       : {},
     devServer: {
       open: true,
-      // static: {
-      //   contentBase: path.resolve(path.resolve(), './sandbox'),
-      //   publicPath: 'http://localhost:9001',
-      // },
       port: 9001,
     },
     optimization: {
