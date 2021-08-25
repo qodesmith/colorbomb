@@ -1,11 +1,11 @@
-import { safeHue } from './helpers'
+import {safeHue} from './helpers.js'
 
 /*
   Add hsl values to a color object.
   https://bit.ly/2yUE7xl - Conversion formula came from this wikipedia article. 🙃
 */
 function addHsl(obj) {
-  let { r, g, b } = obj
+  let {r, g, b} = obj
 
   // Convert our RGB values to a range of 0 - 1.
   r /= 255
@@ -20,8 +20,8 @@ function addHsl(obj) {
   const hue = (() => {
     if (chroma === 0) return 0
     if (max === r) return 60 * ((g - b) / chroma)
-    if (max === g) return 60 * (2 + ((b - r) / chroma))
-    /* max === b */return 60 * (4 + ((r - g) / chroma))
+    if (max === g) return 60 * (2 + (b - r) / chroma)
+    /* max === b */ return 60 * (4 + (r - g) / chroma)
   })()
 
   const saturation = (() => {
@@ -29,7 +29,7 @@ function addHsl(obj) {
     return chroma / (1 - Math.abs(2 * max - chroma - 1))
   })()
 
-  return { ...obj, h: safeHue(hue), s: saturation, l: lightness }
+  return {...obj, h: safeHue(hue), s: saturation, l: lightness}
 }
 
 export default addHsl

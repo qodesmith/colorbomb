@@ -1,12 +1,14 @@
-import { numCheck, safeHue } from './helpers'
-import addHex from './addHex'
-import addRgb from './addRgb'
-
+import {numCheck, safeHue} from './helpers.js'
+import addHex from './addHex.js'
+import addRgb from './addRgb.js'
 
 // Hsl(a) string => color object.
 function hslaColor(str) {
   /*
-    Split the string by the following 3 characters: (),
+    Split the string by the following 3 characters:
+      * (
+      * )
+      * ,
     This will always leave an empty string as the last item in the array.
   */
   const [type, h, s, l, a, empty] = str.split(/[\(\),]/)
@@ -29,7 +31,7 @@ function hslaColor(str) {
 
   if (isNaN(hue) || !alphaOk) throw error
 
-  const results = { h: hue, s: saturation, l: lightness, a: alpha }
+  const results = {h: hue, s: saturation, l: lightness, a: alpha}
   return addHex(addRgb(results))
 }
 
