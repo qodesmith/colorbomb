@@ -5,7 +5,10 @@ import addRgb from './addRgb.js'
 // Hsl(a) string => color object.
 function hslaColor(str) {
   /*
-    Split the string by the following 3 characters: (),
+    Split the string by the following 3 characters:
+      * (
+      * )
+      * ,
     This will always leave an empty string as the last item in the array.
   */
   const [type, h, s, l, a, empty] = str.split(/[\(\),]/)

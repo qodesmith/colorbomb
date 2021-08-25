@@ -94,7 +94,7 @@ function _fromRawRgbOrRgba(values, calledFromRgb) {
   if (!alphaOk) throw new Error(`Incorrect alpha value${commonMessage}`)
 
   const [r, g, b] = rgb.map(Math.round) // Round to whole numbers.
-  return addHex(addHsl({r, g, b, a: alpha}))
+  return addRawStringValues(addHex(addHsl({r, g, b, a: alpha})))
 }
 
 /*
@@ -119,7 +119,7 @@ function _fromRawHslOrHsla(values, calledFromHsl) {
   // Convert each value to a number - we allow strings for flexibility.
   const hsl = values.map(val => +val)
   const [h, s, l] = hsl
-  const alpha = calledFromHsl ? 1 : rgb.pop()
+  const alpha = calledFromHsl ? 1 : hsl.pop()
   const hueOk = !isNaN(h)
   const saturationOk = numCheck(s, 0, 100)
   const lightnessOk = numCheck(l, 0, 100)
@@ -137,6 +137,8 @@ function _fromRawHslOrHsla(values, calledFromHsl) {
     throw new Error(`Incorrect number of values ${commonMessage}`)
   }
   if (!alphaOk) throw new Error(`Incorrect alpha value${commonMessage}`)
+
+  return addRawStringValues(hslaColor(`hsla(${h},${s}%,${l}%,${alpha})`))
 }
 
 export default colorbomb
